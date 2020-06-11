@@ -1,0 +1,85 @@
+@import '../../../function.less';
+.history-page{
+  padding: 50px .7rem;
+  box-sizing: border-box;
+  .orderby-wrap{
+    margin-bottom: 15px;
+    .orderby-one,.orderby-two{
+      display: inline-block;
+      margin-right: .5rem;
+    }
+    .sm-btn{
+      float: right;
+    }
+  }
+  .history-table{
+    .bg-bx();
+    .table-ul{
+      // border: 1px solid red;
+      .table-th{
+        // border: 1px solid red;
+        padding: 0 30px;
+        .th-ul{
+            // border: 1px solid red;
+          display: flex;
+          justify-content: space-between;
+          .th-li{
+            font-size: 14px;
+            color: #B2B2B2;
+            line-height: 54px;
+            display: inline-block;
+            &:nth-of-type(1){
+              width: 60%;
+            }
+            &:nth-of-type(2){
+              width: 40%;
+            }
+          }
+        }
+      }
+      .table-td{
+          border-top: 1px solid #E5E5E5;
+          padding: 0 30px;
+          cursor: default;
+          &:hover{
+            background: #FFF7F5;                    
+          }
+          .td-ul{
+              display: flex;
+              justify-content: space-between;
+              .td-li{
+                  line-height: 60px;
+                  font-size: 16px;
+                  color: #333333;
+                  display: inline-block;
+                  &:nth-of-type(1){
+                    width: 60%;
+                    }
+                    &:nth-of-type(2){
+                        width: 40%;
+                    }
+                  span{
+                      vertical-align: middle;
+                  }
+                  img{
+                      width: 20px;
+                      height: 20px;
+                      vertical-align: middle;
+                  }
+              }
+          }
+      }
+      .li-no-data{
+        color: #B2B2B2;
+        font-size: 16px;
+        height: 54px;
+        line-height: 54px;        
+        text-align: center;
+        cursor: default;
+        &:hover{
+          background: #fff;                    
+        }
+      }
+    }
+  }
+}

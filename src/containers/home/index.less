@@ -1,0 +1,41 @@
+.index-page{
+  width: 100%;   
+  .index-content{
+    width: 1088px;
+    margin: 0 auto;    
+    padding-top: 58px;
+    color: #fff;
+    .mobile-item-wrapper{
+      display: none;
+    }
+  }
+}
+@media screen and (max-width:1000px) {
+  .index-page{  
+    .index-content{
+      width: 3.45rem;
+      margin: 0 auto;    
+      padding-top: 58px;
+      color: #fff;
+      .mobile-item-wrapper{
+        display: block;
+        margin-top: 10px;
+        ul{         
+          display: flex; 
+          justify-content: space-evenly;
+          li{
+            // flex: 1;
+            margin-right: .40rem;
+            img{
+              width: 54px;
+              height: 54px;
+            }
+            &:last-child{
+              margin-right:0;
+            }
+          }
+        }
+      }
+    }
+  }
+} 

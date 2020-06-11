@@ -1,0 +1,104 @@
+.transaction-content{
+    padding: 40px 50px 50px 50px;
+    .line-title{
+        font-family: NotoSansHans-Medium;
+        font-size: 16px;
+        color: #333333;
+        margin-bottom: 15px;
+        display: inline-block;
+        width: 100%;
+        .left{
+            float: left;
+        }
+        .right{
+            float: right;
+            .checkbox-wrapper{                
+                display: inline-block;
+            }
+        }
+    }
+    .line-select{
+        width: 700px;
+        margin-bottom: 40px;
+    }
+    .info-message{
+        background: #F6F6F6;
+        border-radius: 3px;
+        font-family: NotoSansHans-Medium;
+        font-size: 14px;
+        color: #333333;
+        margin-top: 30px;
+        padding: 12px 15px;
+        line-height: 26px;
+        .message-number{
+            font-family: NotoSansHans-Medium;
+            font-size: 14px;
+            color: #5CB1FF;
+            line-height: 21px;
+        }
+        .message-content
+        {
+            display: inline-block;
+            width: 100%;
+            .message-title{
+                float: left;
+            }
+            .message-value
+            {
+                float: right;
+            }
+        }
+    }
+    .confrim
+    {
+        margin: 30px auto;
+        text-align: center;
+    }
+    .line-group{
+        display: flex;
+        .line-content{
+            flex: auto;
+        }
+        .line-btn{
+            flex: 1;
+            width: 190px;
+        }
+        .input-message{
+            font-size: 12px;
+            color: #5CB1FF;
+            margin-top: 5px;
+            width: 495px;
+        }
+        .amount-message{
+            font-size: 12px;
+            color: #2DDE4F;
+            margin-top: 5px;
+            width: 190px;
+            &.error{
+                color: #F25151
+            }
+        }
+        .line-input-text{
+            background: #F6F6F6;
+            border: 1px solid #E5E5E5;
+            border-radius: 3px;
+            height: 50px;
+            line-height: 50px;
+            font-family: NotoSansHans-Medium;
+            font-size: 14px;
+            color: #333333;
+            padding-left: 20px;
+        }
+    }
+    .ratio-slider{
+        margin-top: 13px;
+    }
+    .line-icon{
+        margin: 25px auto;
+        text-align: center;
+        img{
+            width: 30px;
+            height: 30px;
+        }
+    }
+}

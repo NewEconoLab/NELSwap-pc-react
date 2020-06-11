@@ -1,0 +1,87 @@
+.search-warp{  
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // opacity: 0.3;
+    background: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    z-index: 1030;
+    .search-model{
+        position: fixed;
+        width: 800px;
+        height: 475px;
+        top: 50%;
+        left: 50%;
+        -moz-transform: translate(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        border-radius: 5px;
+        overflow:hidden;        
+        .search-header{
+            height: 56px;
+            background: #5CB1FF;
+            font-family: NotoSansHans-Medium;
+            font-size: 16px;
+            color: #FFFFFF;
+            text-align: center;
+            line-height: 56px;
+            border-radius: 5px 5px 0px 0px;
+            .search-close{
+                float: right;
+                margin-top: 16px;
+                margin-right: 20px;
+                width: 24px;
+                height: 24px;
+                cursor: pointer;
+                img{
+                    width: 100%;
+                }
+            }
+        }
+        .search-input-model{
+            padding: 30px 50px;
+            border-bottom: #E5E5E5 1px solid;
+            background: #fff;
+        }
+        .assetinfo-list{
+            background: #fff;
+            max-height: 324px;
+            min-height: 324px;
+            overflow-y:auto;
+            .assetinfo-group{
+                width: 800px;
+                height: 70px;
+                .asset-info{
+                    margin: auto 50px;            
+                    padding: 25px 0px;
+                    border-bottom: #E5E5E5 1px solid;
+                    line-height: 20px;
+                    .asset-icon{
+                        margin-right: 10px;
+                        img{
+                            width: 20px;
+                            height: 20px;
+                            margin: 0 auto;
+                        }
+                    }
+                    .asset-symbol{
+                        margin-right: 10px;
+                        font-size: 16px;
+                        color: #333333;
+                    }
+                    .asset-name{
+                        font-family: NotoSansHans-Medium;
+                        font-size: 14px;
+                        color: #B2B2B2;
+                    }
+                }
+                &:hover {
+                    cursor: pointer;
+                    background: #EFF7FF;
+                }
+            }
+        }
+    }
+}
