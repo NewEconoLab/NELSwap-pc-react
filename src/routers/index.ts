@@ -1,7 +1,7 @@
 import asyncComponent from '@/components/asyncComponent';
 // import redirectComponent from '@/components/redirectComponent';
 
-export default [  
+export default [
   // {
   //   component: asyncComponent(() => import('../containers/address/addressinfo')),
   //   path: '/address/:address',
@@ -9,7 +9,7 @@ export default [
   {
     component: asyncComponent(() => import('../containers/transaction/layout')),
     path: '/transaction',
-    children:[
+    children: [
       {
         component: asyncComponent(() => import('../containers/transaction/tran')),
         path: '/transaction/tran',
@@ -23,7 +23,7 @@ export default [
   {
     component: asyncComponent(() => import('../containers/bourse/layout')),
     path: '/bourse',
-    children:[
+    children: [
       {
         component: asyncComponent(() => import('../containers/bourse/txhistory')),
         path: '/bourse/txhistory',

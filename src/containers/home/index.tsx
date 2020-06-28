@@ -10,7 +10,6 @@ import { injectIntl } from 'react-intl';
 
 @observer
 class Home extends React.Component<any, any> {
-  
   public render() {
     return (
       <div className="index-page">

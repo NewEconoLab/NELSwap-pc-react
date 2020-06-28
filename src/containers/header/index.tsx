@@ -18,8 +18,7 @@ import Select from '@/components/select';
 import LoginToast from '../logintoast';
 import common from '@/store/common';
 
-interface IState
-{
+interface IState {
   isShowSearch: boolean,         // 是否在首页显示search功能
   inputValue: string,            // 输入框的输入
   inputPlaceHolder: string,      // 输入框的placeholder
@@ -32,8 +31,7 @@ interface IState
   loginText: string, // 登陆显示
   expand: boolean,
 }
-interface IProps
-{
+interface IProps {
   home: IHomeStore,
   history: History,
   locale: any,
@@ -51,35 +49,31 @@ export default class Header extends React.Component<IProps, IState>{
     inputValue: '',
     inputPlaceHolder: this.props.input.placeholder,
     isShowLanguage: false,
-    languageText: store['common'].language === 'en' ? "En" : "中",
-    languageImg: store['common'].language === 'en' ? en : zh,
+    languageText: store[ 'common' ].language === 'en' ? "En" : "中",
+    languageImg: store[ 'common' ].language === 'en' ? en : zh,
     isShowOther: false,
     isShowMenu: false,
     loginText: 'Login',
-		expand: false,
+    expand: false,
   }
-  public options =[{id:'usd',name:'USD',icon:require('@/img/usd.png')},{id:'cny',name:'CNY',icon:require('@/img/cny.png')}];
+  public options = [ { id: 'usd', name: 'USD', icon: require('@/img/usd.png') }, { id: 'cny', name: 'CNY', icon: require('@/img/cny.png') } ];
   // private searchRef: React.RefObject<any> = React.createRef()
   // public prop = this.props.intl.messages;
-  public componentDidMount()
-  {
-    common.initExchangeInfo(this.options[0].id)
+  public componentDidMount() {
+    common.initExchangeInfo(this.options[ 0 ].id)
     this.setState({
       inputValue: getQueryString('keywords') || ''
     })
-    if (location.pathname !== '/search')
-    {
+    if (location.pathname !== '/search') {
       this.setState({
         isNormalSearch: true
       })
     }
 
-    this.props.history.listen(() =>
-    {
+    this.props.history.listen(() => {
       let isNormalSearch = false;
 
-      if (location.pathname !== '/search')
-      {
+      if (location.pathname !== '/search') {
         isNormalSearch = true
       }
 
@@ -94,8 +88,7 @@ export default class Header extends React.Component<IProps, IState>{
   }
 
   // 销毁
-  public componentWillUnmount()
-  {
+  public componentWillUnmount() {
     EventHandler.remove(this.globalClick);
     this.setState({
       isShowLanguage: false,
@@ -103,26 +96,24 @@ export default class Header extends React.Component<IProps, IState>{
     })
   }
 
-  
-	// 展开
-	public onExpand = (e) => {
-		// 取反
-		const expand = !this.state.expand;
-	
-		this.setState({
-		  expand: expand
-		});
-	
-		e.stopPropagation();
+
+  // 展开
+  public onExpand = (e) => {
+    // 取反
+    const expand = !this.state.expand;
+
+    this.setState({
+      expand: expand
+    });
+
+    e.stopPropagation();
   }
 
-  public onSelect=(e)=>
-  {
-    common.initExchangeInfo(e['id'])
+  public onSelect = (e) => {
+    common.initExchangeInfo(e[ 'id' ])
   }
-  
-  public render()
-  {
+
+  public render() {
     return (
       <header className={this.headerClass()}>
         <div className="header-box">
@@ -135,11 +126,10 @@ export default class Header extends React.Component<IProps, IState>{
                 <ul>
                   {/* <li className={this.mapRouterUnderline('/')}><Link to="/bourse/salemarket">首页</Link></li> */}
                   {/* <li className={this.mapRouterUnderline('/auction')}>域名竞拍</li> */}
-                  <li className={this.mapRouterUnderline(['/transaction/tran','/transaction/pool'])}><Link to="/transaction/tran">交易</Link></li>
-                  <li className={this.mapRouterUnderline(['/myaccount/balance', '/myaccount/mydomain', '/myaccount/bind', '/myaccount/bonus', '/myaccount/setting'])}>
-                    {/* <Link to="/myaccount/balance">我的账户</Link> */}
+                  <li className={this.mapRouterUnderline([ '/transaction/tran', '/transaction/pool' ])}><Link to="/transaction/tran">交易</Link></li>
+                  {/* <li className={this.mapRouterUnderline([ '/myaccount/balance', '/myaccount/mydomain', '/myaccount/bind', '/myaccount/bonus', '/myaccount/setting' ])}>
                     <a href="javascript:;" onClick={this.toMyaccount}>行情</a>
-                  </li> 
+                  </li> */}
                 </ul>
               )
             }
@@ -148,59 +138,59 @@ export default class Header extends React.Component<IProps, IState>{
             <ul>
               <li>
                 <div className="function" onClick={this.onExpand}>
-                  <img className="function-icon" src={require('@/img/function.png')} alt=""/>
+                  <img className="function-icon" src={require('@/img/function.png')} alt="" />
                   {this.state.expand &&
-                  <div className="hint-content">
-                    <div className="hint-line sel" >
-                      <div className="line-name">
-                        显示货币
+                    <div className="hint-content">
+                      <div className="hint-line sel" >
+                        <div className="line-name">
+                          显示货币
                       </div>
-                      <Select options={this.options} text=""  onCallback={this.onSelect} />
-                    </div>
-                    <div className="hint-line" >
-                      <div className="line-text">
-                        帮助
+                        <Select options={this.options} text="" onCallback={this.onSelect} />
+                      </div>
+                      <div className="hint-line" >
+                        <div className="line-text">
+                          帮助
+                      </div>
+                      </div>
+                      <div className="hint-wrapper">
+                        <div className="arrow" />
                       </div>
                     </div>
-                    <div className="hint-wrapper">
-                      <div className="arrow" />
-                    </div>
-                  </div>
                   }
                 </div>
               </li>
               <li>
-              <div className="language-toggle" id="language">
-                <label onClick={this.toggleLanguage}>
-                  <div className="language-content">
-                    <span className="lang-text">中</span>
-                    <img src={require('@/img/zh.png')} alt="ch.png" />
-                  </div>
-                  <span className="middle-line" />
-                  <div className="triangle-wrap">
-                    <div className="triangle" />
-                  </div>
-                </label>
-                {
-                  this.state.isShowLanguage && 
-                  <div className="nav-wrap" id="selectlang" onClick={this.toggleLanguage}>
-                    <ul>
-                      <li><a onClick={this.onClickChinese}>中文</a></li>
-                      <li><a onClick={this.onClickEnglish}>English</a></li>
-                    </ul>
-                  </div>
-                }
-              </div>                
+                <div className="language-toggle" id="language">
+                  <label onClick={this.toggleLanguage}>
+                    <div className="language-content">
+                      <span className="lang-text">中</span>
+                      <img src={require('@/img/zh.png')} alt="ch.png" />
+                    </div>
+                    <span className="middle-line" />
+                    <div className="triangle-wrap">
+                      <div className="triangle" />
+                    </div>
+                  </label>
+                  {
+                    this.state.isShowLanguage &&
+                    <div className="nav-wrap" id="selectlang" onClick={this.toggleLanguage}>
+                      <ul>
+                        <li><a onClick={this.onClickChinese}>中文</a></li>
+                        <li><a onClick={this.onClickEnglish}>English</a></li>
+                      </ul>
+                    </div>
+                  }
+                </div>
               </li>
               <li>
-              {
-                this.props.common.address === '' ? 
-                <span className="point-login" onClick={this.onGoLogin}>Login</span> : 
-                <span className="logined-text">
-                  <span className="yuan-box" /> 
-                  {this.props.common.address.replace(/^(.{4})(.*)(.{4})$/, '$1...$3')}
-                </span>
-              }
+                {
+                  this.props.common.address === '' ?
+                    <span className="point-login" onClick={this.onGoLogin}>Login</span> :
+                    <span className="logined-text">
+                      <span className="yuan-box" />
+                      {this.props.common.address.replace(/^(.{4})(.*)(.{4})$/, '$1...$3')}
+                    </span>
+                }
                 {/* {this.props.common.address !== '' && <span className="logined-text"><span className="yuan-box" /> {this.props.common.address.replace(/^(.{4})(.*)(.{4})$/, '$1...$3')}</span>} */}
               </li>
             </ul>
@@ -210,14 +200,13 @@ export default class Header extends React.Component<IProps, IState>{
           this.props.common.isLoginFlag > 0 && <DownloadTeemo {...this.props} />
         }
         {
-          this.props.common.loginState > 0 && <LoginToast/>
+          this.props.common.loginState > 0 && <LoginToast />
         }
       </header>
     );
   }
 
-  private globalClick = () =>
-  {
+  private globalClick = () => {
     this.setState({
       isShowLanguage: false,
       isShowOther: false,
@@ -226,8 +215,7 @@ export default class Header extends React.Component<IProps, IState>{
   }
 
   // 是否显示语言
-  private toggleLanguage = (e) =>
-  {
+  private toggleLanguage = (e) => {
     this.setState({
       isShowLanguage: !this.state.isShowLanguage,
       isShowOther: false
@@ -241,9 +229,8 @@ export default class Header extends React.Component<IProps, IState>{
   //   window.location.href = `${location.origin}${base || ''}${locations.pathname}${locations.search}${locations.hash}`
   // }
   // 切换英文
-  private onClickEnglish = () =>
-  {
-    store['common'].setLanguage('en');
+  private onClickEnglish = () => {
+    store[ 'common' ].setLanguage('en');
     this.setState({
       languageText: "En",
       languageImg: en
@@ -251,9 +238,8 @@ export default class Header extends React.Component<IProps, IState>{
     sessionStorage.setItem('language', 'en');
   }
   // 切换中文
-  private onClickChinese = () =>
-  {
-    store['common'].setLanguage('zh');
+  private onClickChinese = () => {
+    store[ 'common' ].setLanguage('zh');
     this.setState({
       languageText: "中",
       languageImg: zh
@@ -261,8 +247,7 @@ export default class Header extends React.Component<IProps, IState>{
     sessionStorage.setItem('language', 'zh');
   }
   // 登录与登出
-  private onGoLogin = () =>
-  {
+  private onGoLogin = () => {
     this.props.common.login();
   }
   // // 登录与登出
@@ -272,44 +257,35 @@ export default class Header extends React.Component<IProps, IState>{
   // }
 
   // 跳转到我的账户
-  private toMyaccount = ()=>{
-    // const base = this.props.common.network === 'MainNet'?'':'/test';
-    if(!this.props.common.address)
-    {
-      this.props.common.login();
-      // this.props.history.goBack();
-      return
-    }
-    this.props.history.push('/myaccount/balance');
-  }
+  // private toMyaccount = () => {
+  //   // const base = this.props.common.network === 'MainNet'?'':'/test';
+  //   if (!this.props.common.address) {
+  //     this.props.common.login();
+  //     // this.props.history.goBack();
+  //     return
+  //   }
+  //   this.props.history.push('/myaccount/balance');
+  // }
   // 一级菜单选择
-  private mapRouterUnderline = (path) =>
-  {
-    if (path instanceof Array)
-    {
-      for (const i in path)
-      {
-        if (new RegExp(path[i], 'i').test(this.props.history.location.pathname))
-        {
+  private mapRouterUnderline = (path) => {
+    if (path instanceof Array) {
+      for (const i in path) {
+        if (new RegExp(path[ i ], 'i').test(this.props.history.location.pathname)) {
           return "active"
         }
       }
     }
-    if (path === this.props.history.location.pathname)
-    {
+    if (path === this.props.history.location.pathname) {
       return "active"
     }
     return '';
   }
   // 标题样式显示
-  private headerClass = () =>
-  {
-    if (new RegExp('/bourse', 'i').test(this.props.history.location.pathname))
-    {
+  private headerClass = () => {
+    if (new RegExp('/bourse', 'i').test(this.props.history.location.pathname)) {
       return "header-wrap"
     }
-    if (new RegExp('/myaccount', 'i').test(this.props.history.location.pathname))
-    {
+    if (new RegExp('/myaccount', 'i').test(this.props.history.location.pathname)) {
       return "header-wrap"
     }
     return "header-wrap header-shadow"

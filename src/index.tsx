@@ -11,14 +11,14 @@ import en_US from 'antd/lib/locale-provider/en_US';
 import { LocaleProvider } from 'antd';
 import storeCommon from '@/store/common';
 import Intl from 'intl';
-import common from '@/store/common'; 
+import common from '@/store/common';
 import { observer } from 'mobx-react';
 
 global.Intl = Intl;
-window['Intl'] = Intl;
+window[ 'Intl' ] = Intl;
 // common.setTimeGetBlock();
 
-window.addEventListener('Teemo.NEO.READY',()=>{
+window.addEventListener('Teemo.NEO.READY', () => {
   common.isLoadTeemo = true;
   common.getSessionAddress();
   common.isSetedAddress = true;
@@ -26,22 +26,22 @@ window.addEventListener('Teemo.NEO.READY',()=>{
 });
 
 setTimeout(() => {
-  if(!window['Teemo']) {
+  if (!window[ 'Teemo' ]) {
     common.isSetedAddress = true;
   }
-},1000)
+}, 1000)
 
 // 网络切换
-window.addEventListener('Teemo.NEO.NETWORK_CHANGED',(data:CustomEvent)=>{
+window.addEventListener('Teemo.NEO.NETWORK_CHANGED', (data: CustomEvent) => {
   console.log("inject NETWORK_CHANGED ");
-  console.log(data.detail.networks[0]);
-  const base = data.detail.networks[0]==='MainNet'?'':'/test';
+  console.log(data.detail.networks[ 0 ]);
+  const base = data.detail.networks[ 0 ] === 'MainNet' ? '' : '/test';
   const locations = window.location;
   // console.log(`${location.origin}${base || ''}${locations.pathname}${locations.search}${locations.hash}`)
   window.location.replace(`${location.origin}${base || ''}${locations.pathname.replace('/test', '')}${locations.search}${locations.hash}`);
 })
 // 账户变更
-window.addEventListener('Teemo.NEO.ACCOUNT_CHANGED',(data:CustomEvent)=>{
+window.addEventListener('Teemo.NEO.ACCOUNT_CHANGED', (data: CustomEvent) => {
   console.log("inject ACCOUNT_CHANGED ");
   console.log(data.detail.address);
   // common.address=data.detail.address;
@@ -49,17 +49,17 @@ window.addEventListener('Teemo.NEO.ACCOUNT_CHANGED',(data:CustomEvent)=>{
   window.location.reload();
 })
 // 链接
-window.addEventListener('Teemo.NEO.CONNECTED',(data:CustomEvent)=>{
+window.addEventListener('Teemo.NEO.CONNECTED', (data: CustomEvent) => {
   console.log("inject CONNECTED ");
   console.log(data.detail);
   window.location.reload();
 })
 // 断开链接
-window.addEventListener('Teemo.NEO.DISCONNECTED',(data:CustomEvent)=>{
+window.addEventListener('Teemo.NEO.DISCONNECTED', (data: CustomEvent) => {
   console.log("inject DISCONNECTED ");
   console.log(data.detail);
   sessionStorage.removeItem('dexLogin');
-  common.address='';
+  common.address = '';
   window.location.reload();
 })
 // 交易成功通知
@@ -73,9 +73,10 @@ window.addEventListener('Teemo.NEO.DISCONNECTED',(data:CustomEvent)=>{
 //   console.log(data.detail);
 // })
 
-
 const ObserverRender = observer(() => {
-  if(!common.isSetedAddress) {
+
+  location.hash = "test/transaction/tran";
+  if (!common.isSetedAddress) {
     return <div />
   }
 
@@ -84,33 +85,30 @@ const ObserverRender = observer(() => {
   )
 })
 
-if (process.env.NODE_ENV === "development") {    
-    // common.initLoginInfo(document.getElementById("test")as HTMLElement);
-    ReactDOM.render(
-      <AppContainer>
-        <LocaleProvider locale={storeCommon.language === 'en' ? en_US : zh_CN}>
-          <ObserverRender/>
-        </LocaleProvider>
-      </AppContainer>,
-      document.getElementById('root') as HTMLElement
-    );
-    if (module.hot) {
-      module.hot.accept();
-    }
+if (process.env.NODE_ENV === "development") {
+  // common.initLoginInfo(document.getElementById("test")as HTMLElement);
+  ReactDOM.render(
+    <AppContainer>
+      <LocaleProvider locale={storeCommon.language === 'en' ? en_US : zh_CN}>
+        <ObserverRender />
+      </LocaleProvider>
+    </AppContainer>,
+    document.getElementById('root') as HTMLElement
+  );
+  if (module.hot) {
+    module.hot.accept();
+  }
 }
 
-// 初始化鼠标随机方法
-// Neo.Cryptography.RandomNumberGenerator.startCollectors();
-
 if (process.env.NODE_ENV === "production") {
-    // common.getSessionAddress();
-    // common.initLoginInfo(document.getElementById("root")as HTMLElement);
-    ReactDOM.render(
-      <LocaleProvider locale={zh_CN}>
-        <ObserverRender/>
-      </LocaleProvider>,
-      document.getElementById('root') as HTMLElement
-    );
+  // common.getSessionAddress();
+  // common.initLoginInfo(document.getElementById("root")as HTMLElement);
+  ReactDOM.render(
+    <LocaleProvider locale={zh_CN}>
+      <ObserverRender />
+    </LocaleProvider>,
+    document.getElementById('root') as HTMLElement
+  );
 }
 
 unregister();
